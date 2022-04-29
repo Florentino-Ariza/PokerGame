@@ -1,8 +1,7 @@
 #include"DemoDisplay.hpp"
-
+DemoDisplay game;
 int main()
 {
-    DemoDisplay game;
-    while(!game.show())game.operate();
+    game.main_process();
     return 0;
 }

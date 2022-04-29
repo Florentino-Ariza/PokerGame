@@ -74,10 +74,15 @@ int main()
     tmp->FileDisplayRegister();
     // 一定要先注册一下， 一个类只要注册过一次就可以了
 
-    HSON::saveobject("FileDisplay", "FILE_DISP", HVON tmp);
+    // HSON::saveobject("FileDisplay", "FILE_DISP", HVON tmp);
     // 保存到文件里面
 
-    // HSON::getobject<FileDisplay>("FileDisplay", "FILE_DISP");
+    FileDisplay* ttmp =
+    HSON::getobject<FileDisplay>("FileDisplay", "FILE_DISP");
+    for(int i=0; i<10; i++)
+    {
+        cout << (*ttmp->player_1_Hand)[i] << " " ;
+    }
     // 传回一个和存储时候一模一样的数据结构的指针
 
     return 0;

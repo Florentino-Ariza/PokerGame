@@ -2,6 +2,11 @@
 int DemoDisplay::show()
     {
         system("cls");
+        if(!this->GameStart)
+        {
+            cout<<"There are "<<this->cur_player_num<<" players"<<endl;
+            return 0;
+        }
         if(this->is_win()){
             cout<<"Player "<<this->is_win()<<" win !"<<endl;
             system("pause");
@@ -21,16 +26,8 @@ int DemoDisplay::show()
 	        }
         }
         cout<<"Now it's the Player "<<this->player_on_turn+1<<" turn!"<<endl;
-        cout<<"_____________________________________________________________________________________"<<endl;
         cout<<"The card on table: ";
         for (vector<int>::iterator bg = this->cards_Played->begin(); bg != this->cards_Played->end(); bg++)
-	    {
-            cout<<*bg<<" ";
-		    //printf("%s",this->int_to_char(*bg));
-	    }
-        cout<<endl;
-        cout<<"The card had picked: ";
-        for (vector<int>::iterator bg = this->cards_Picked->begin(); bg != this->cards_Picked->end(); bg++)
 	    {
             cout<<*bg<<" ";
 		    //printf("%s",this->int_to_char(*bg));
@@ -67,20 +64,49 @@ char* DemoDisplay::int_to_char(int card_id)
 void DemoDisplay::operate()
 {
     int choice=0;
-    cout<<"What's your act?"<<endl<<"1.Pick; 2.Play; 3.Pass;";
-    cin>>choice;
-    switch(choice)
+    cout<<"What's your command?"<<endl;
+    if(!this->GameStart)cout<<"1.Add player;\n2.Player Prepare\n";
+    else cout<<"3.Delievr\n4.Play\n5.Pass\n";
+    cin>>this->Command_ID;
+    vector<int> tmp;
+    switch (Command_ID)
     {
-        case 1: cout<<"The ID of card you picked:";
-                int id;
-                cin>>id;
-                this->pick(id);
-                break;
-        case 2: this->play();
-                break;
-        case 3: this->pass();
-                break;      
-        default: break;  
+    case 2:
+        cout<<"UID:";
+        cin>>this->U_ID;
+        break;
+    case 4:
+        cout<<"Play Card:";
+        int id;
+        cin>>id;
+        this->cards_Picked->swap(tmp);
+        this->cards_Picked->push_back(id);
+        break;
+    default:
+        break;
     }
+    this->if_Command=1;
     return;
 }
+    void DemoDisplay::main_process()
+    {
+        do
+        {
+            show();
+            operate();
+            if(this->if_Command)
+            {
+                this->if_Command=0;
+                switch(this->Command_ID)
+                {
+                    case 1: this->player_add();break;
+                    case 2: this->player_prepare();break;
+                    case 3: if(this->GameStart)this->card_deliver();break;
+                    case 4: if(this->GameStart)this->play();break;
+                    case 5: if(this->GameStart)this->pass();break;
+                    default: break;
+                }
+            }
+        } while(!(this->GameEnd=this->is_win()));
+        return;
+    }

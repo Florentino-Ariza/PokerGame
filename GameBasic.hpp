@@ -1,25 +1,24 @@
 #ifndef GameBasic_H
 #define GameBasic_H
-#include<iostream>
 #include<vector>
 #include<algorithm>
+#include<Windows.h>
 using namespace std;
-class GameInfo
+class GameBasic
 {
     public:
-	GameInfo();
-	~GameInfo();
+	GameBasic();
+	~GameBasic();
 	vector<int>* cards_Played;
-    vector<int>* cards_Picked;
 	vector<int>* player_Hand[5];
+    vector<int>* cards_Picked;
 	int player_num;
     int player_on_turn;
     int player_last_play;
-    void pick(int card_id);
-    bool is_legal();
     int is_win();
     void play();
     void pass();
+    void card_deliver();
 };
 vector<int>* randGen();
 

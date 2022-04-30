@@ -15,8 +15,6 @@ GameBasic::GameBasic()
     this->cards_Picked = new vector<int>;
     this->player_num = 4;//默认
     for(int i=0;i<player_num;i++) this->player_Hand[i] = randGen();
-    this->player_on_turn = rand()%4 +1;
-    this->player_last_play = this->player_on_turn;
 }
 GameBasic::~GameBasic()
 {
@@ -87,4 +85,8 @@ void GameBasic::card_deliver()
         vector<int> tmp;
         this->player_Hand[i]->swap(tmp);
     }   
+    for(int i=0;i<player_num;i++) this->player_Hand[i] = randGen();
+    this->player_on_turn = rand()%4 +1;
+    this->player_last_play = this->player_on_turn;
+    return;
 }

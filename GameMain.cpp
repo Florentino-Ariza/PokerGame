@@ -20,15 +20,21 @@
         } while(!(this->GameEnd=this->is_win()));
         return;
     }*/
+    int GameMain::uid_mapping(int uid)
+    {
+        for(int i=0;i<this->cur_player_num;i++)if(uid==this->uid_list[i])return i;
+        return -1;
+    }
     void GameMain::player_add()
     {
-        this->cur_player_num++;
+        this->uid_list[this->cur_player_num++]=this->U_ID;
         return;
     }
     void GameMain::player_prepare()
     {
-        if(this->U_ID>this->cur_player_num)return;
-        this->player_ready[this->U_ID]=1;
+        int id=this->uid_mapping(this->U_ID);
+        if(id==-1)return;
+        this->player_ready[id]=1;
         int i;
         for(i=0;i<=this->player_num;i++)if(!this->player_ready[i])break;
         if(i==this->player_num)this->GameStart=1;
@@ -41,6 +47,7 @@
         this->if_Command=0;
         this->cur_player_num=0;
         for(int i=0;i<this->player_num;i++)this->player_ready[i]=0;
+        for(int i=0;i<this->player_num;i++)this->uid_list[i]=rand()%10000;
     }
     GameMain::~GameMain()
     {

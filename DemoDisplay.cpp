@@ -71,6 +71,7 @@ void DemoDisplay::operate()
     vector<int> tmp;
     switch (Command_ID)
     {
+    case 1:
     case 2:
         cout<<"UID:";
         cin>>this->U_ID;

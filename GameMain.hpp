@@ -1,7 +1,7 @@
 #ifndef GameMain_H
 #define GameMain_H
 #include"GameBasic.hpp"
-
+#include"Hson.h"
 class GameMain : public GameBasic
 {
     public:
@@ -15,9 +15,12 @@ class GameMain : public GameBasic
     int player_ready[5];
     GameMain();
     ~GameMain();
-    //void main_process();//main loop, call the func
     void player_add();//add
     void player_prepare(); 
     int uid_mapping(int uid);
+    void operate();
+    void main_process();
+    void FileDisplayRegister();
+    void File_Write();
 };
 #endif

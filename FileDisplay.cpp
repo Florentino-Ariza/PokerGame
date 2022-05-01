@@ -1,6 +1,4 @@
-#include "hson.hpp"
 #include "GameMain.hpp"
-
 
 class FileDisplay :GameMain
 {

@@ -5,7 +5,7 @@ void GameMain::main_process()
         this->FileDisplayRegister();
         do
         {
-            operate();
+            operate();//暂时用于指令传输，链接qt后删除
             if(if_Command)
             {
                 if_Command=0;

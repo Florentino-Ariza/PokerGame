@@ -19,6 +19,7 @@ class GameBasic
     void play();
     void pass();
     void card_deliver();
+    void is_legal();
 };
 vector<int>* randGen();
 

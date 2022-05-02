@@ -19,19 +19,19 @@ GameBasic::GameBasic()
 GameBasic::~GameBasic()
 {
 }
-/*
-bool GameBasic::is_legal()
+int GameBasic::is_legal(vector<int>* cards_Picked,vector<int>* cards_Played)
 {
-    int num_of_picked=this->cards_Picked->size();
-    switch(num_of_picked)
+    int num=cards_Picked->size();
+    if(num!=cards_Played->size())return 0;
+    switch(num)
     {
         case 0: return false;
-        case 1: return true;
+        case 1: if((*cards_Picked)[0]-2)return true;
         case 2: if((*this->cards_Picked)[0]==(*this->cards_Picked)[1])return true;
                 else return false;
-        default: return true; 
+        default: return false; 
     }
-}*/
+}
 int GameBasic::is_win()
 {
     for(int i=0;i<this->player_num;i++)

@@ -1,6 +1,7 @@
 #ifndef GameMain_H
 #define GameMain_H
 #include"GameBasic.hpp"
+#include"FileDisplay.hpp"
 #include"Hson.h"
 class GameMain : public GameBasic
 {
@@ -20,7 +21,6 @@ class GameMain : public GameBasic
     int uid_mapping(int uid);
     void operate();
     void main_process();
-    void FileDisplayRegister();
-    void File_Write();
+    void File_Write(FileDisplay* F);
 };
 #endif

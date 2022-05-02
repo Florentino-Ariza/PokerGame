@@ -1,7 +1,8 @@
 #ifndef FileDisplay_H
 #define FileDisplay_H
-#include "GameMain.hpp"
-
+#include<vector>
+#include"HSON.h"
+using namespace std;
 class FileDisplay
 {
 public:

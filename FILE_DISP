@@ -2,8 +2,7 @@ FileDisplay
 {
     vector<int>
     {
-          1
-        1
+          0
     }
     vector<int>
     {
@@ -76,7 +75,7 @@ FileDisplay
     4
     1
     0
-    2
+    1
     1
     1
     2

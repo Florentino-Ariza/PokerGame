@@ -2,7 +2,8 @@
 void GameMain::main_process()
     {
         HSON::Inithson();
-        this->FileDisplayRegister();
+        FileDisplay* F =new FileDisplay;
+        F->FileDisplayRegister();
         do
         {
             operate();//暂时用于指令传输，链接qt后删除
@@ -18,12 +19,29 @@ void GameMain::main_process()
                     case 5: if(this->GameStart)this->pass();break;
                     default: break;
                 }
-                this->File_Write();
+                this->File_Write(F);
             }
         } while(!(this->GameEnd=this->is_win()));
         return;
     }
-    void GameMain::operate()
+    void GameMain::File_Write(FileDisplay* F)
+    {
+        for(int i=0;i<this->player_num;i++)
+        {
+            F->player_Hand[i]=this->player_Hand[i];
+            F->uid_list[i]=this->uid_list[i];
+            F->player_ready[i]=this->player_ready[i];
+        }
+        F->player_num=this->player_num;
+        F->cur_player_num=this->cur_player_num;
+        F->GameStart=this->GameStart;
+        F->GameEnd=this->GameEnd;
+        F->player_on_turn=this->player_on_turn;
+        F->player_last_play=this->player_last_play;
+        HSON::saveobject("FileDisplay", "FILE_DISP", HVON F);
+        return;
+    }
+        void GameMain::operate()
     {
         int choice=0;
         cout<<"What's your command?"<<endl;
@@ -49,44 +67,6 @@ void GameMain::main_process()
             break;
         }
         this->if_Command=1;
-        return;
-    }
-    void GameMain::FileDisplayRegister()
-    {
-        HSON::classRegister<GameMain>("FileDisplay");
-		HSON::classItemRegister("FileDisplay", "vector<int>",
-		HCON this, HCON & this->cards_Played);
-        for(int i=0;i<player_num;i++)
-        {
-            HSON::classItemRegister("FileDisplay", "vector<int>",
-			HCON this, HCON & this->player_Hand[i]);
-        }
-        HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->player_num);
-        HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->cur_player_num);
-        HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->GameStart);
-        HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->GameEnd);
-        HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->player_on_turn); 
-        HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->player_last_play); 
-        for(int i=0;i<player_num;i++)
-        {
-            HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->uid_list[i]);
-        }
-        for(int i=0;i<player_num;i++)
-        {
-            HSON::classItemRegister("FileDisplay", "int", 
-            HCON this, HCON &this->player_ready[i]);
-        }
-    }
-    void GameMain::File_Write()
-    {
-        HSON::saveobject("FileDisplay", "FILE_DISP", HVON this);
         return;
     }
     int GameMain::uid_mapping(int uid)

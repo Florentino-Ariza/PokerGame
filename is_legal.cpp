@@ -72,3 +72,7 @@ int trans(int id)
 {
     return (id-3)%13;
 }
+bool card_cmp(int a,int b)
+{
+    return trans(a)<trans(b);
+}

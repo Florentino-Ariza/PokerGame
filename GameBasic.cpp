@@ -2,7 +2,7 @@
 vector<int>* randGen()
 {
     vector<int>* res = new vector<int>;
-    for(int i=0; i<13; i++)
+    for(int i=0; i<54; i++)
     {
         res->push_back(rand()%13+1);
     }
@@ -18,19 +18,6 @@ GameBasic::GameBasic()
 }
 GameBasic::~GameBasic()
 {
-}
-int GameBasic::is_legal(vector<int>* cards_Picked,vector<int>* cards_Played)
-{
-    int num=cards_Picked->size();
-    if(num!=cards_Played->size())return 0;
-    switch(num)
-    {
-        case 0: return false;
-        case 1: if((*cards_Picked)[0]-2)return true;
-        case 2: if((*this->cards_Picked)[0]==(*this->cards_Picked)[1])return true;
-                else return false;
-        default: return false; 
-    }
 }
 int GameBasic::is_win()
 {
@@ -85,7 +72,20 @@ void GameBasic::card_deliver()
         vector<int> tmp;
         this->player_Hand[i]->swap(tmp);
     }   
-    for(int i=0;i<player_num;i++) this->player_Hand[i] = randGen();
+    int arr[53];
+    for(int i=0;i<52;i++)arr[i]=i+3;
+    for(int i=0;i<52;i++)
+    {
+        int j=rand()%52;
+        int tmp=arr[j];
+        arr[j]=arr[i];
+        arr[i]=tmp;
+    }
+    for(int i=0;i<this->player_num;i++) 
+    {
+        for(int j=0;j<13;j++)this->player_Hand[i]->push_back(arr[i*13+j]);
+        sort(this->player_Hand[i]->begin(),this->player_Hand[i]->end(),card_cmp);
+    }
     this->player_on_turn = rand()%4 +1;
     this->player_last_play = this->player_on_turn;
     return;

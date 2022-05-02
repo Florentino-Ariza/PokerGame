@@ -3,6 +3,7 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
-bool is_legal(vector<int>* cards_Picked,vector<int>* cards_Played);
+bool is_legal(vector<int>* cards_Picked,vector<int>* cards_Played);//输入当前卡牌和上家的卡牌，返回是否合法
 int trans(int id);
+bool card_cmp(int a,int b);
 #endif

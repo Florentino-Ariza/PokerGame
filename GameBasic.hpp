@@ -2,6 +2,7 @@
 #define GameBasic_H
 #include<vector>
 #include<algorithm>
+#include"is_legal.hpp"
 #include<Windows.h>
 using namespace std;
 class GameBasic
@@ -19,7 +20,7 @@ class GameBasic
     void play();
     void pass();
     void card_deliver();
-    void is_legal();
+    int is_legal(vector<int>* cards_Picked,vector<int>* cards_Played);
 };
 vector<int>* randGen();
 

@@ -41,7 +41,7 @@ void GameMain::main_process()
         HSON::saveobject("FileDisplay", "FILE_DISP", HVON F);
         return;
     }
-        void GameMain::operate()
+    void GameMain::operate()
     {
         int choice=0;
         cout<<"What's your command?"<<endl;

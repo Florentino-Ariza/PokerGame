@@ -35,7 +35,7 @@ void GameBasic::play()
         vector<int>::iterator it_p,it_h;
         vector<int> tmp;
         this->cards_Played->swap(tmp);
-        sort(this->cards_Picked->begin(),this->cards_Picked->end());
+        sort(this->cards_Picked->begin(),this->cards_Picked->end(),card_cmp);
         it_p = this->cards_Picked->begin();
         it_h = this->player_Hand[this->player_on_turn]->begin();
         for(;it_p!=cards_Picked->end();)

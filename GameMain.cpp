@@ -60,8 +60,11 @@ void GameMain::main_process()
             cout<<"Play Card:";
             int id;
             cin>>id;
-            this->cards_Picked->swap(tmp);
-            this->cards_Picked->push_back(id);
+            while(id!=-1)
+            {
+                this->cards_Picked->push_back(id);
+                cin>>id;
+            }
             break;
         default:
             break;
